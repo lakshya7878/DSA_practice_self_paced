@@ -1,0 +1,1 @@
+{"name":"Local: The_Monk_and_Class_Marks","url":"f:\\DSA_practice_self_placed\\STL\\The_Monk_and_Class_Marks.cpp","tests":[{"id":1633173360598,"input":"3\nEve 78\nBob 99\nAlice 78","output":"Bob 99\nAlice 78\nEve 78"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"f:\\DSA_practice_self_placed\\STL\\The_Monk_and_Class_Marks.cpp","group":"local","local":true}
