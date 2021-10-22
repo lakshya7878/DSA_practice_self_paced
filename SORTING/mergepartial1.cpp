@@ -24,5 +24,9 @@ void merge(int arr[],int n,int l,int h,int mid){
         }
 }
 int main(){
-
+    int arr[] = {1,2,7,8,4,5,6};
+    merge(arr,7,0,6,3);
+    for(int i =0;i<6;i++){
+        cout<<arr[i]<<endl;
+    }
 }
