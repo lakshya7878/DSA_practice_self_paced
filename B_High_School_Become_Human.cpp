@@ -35,7 +35,7 @@ typedef vector<vector<pl> > vvpl;
 typedef vector<pl> vpl;
 typedef vector<pii> vpi;
 ll MOD = 998244353;
-double eps = 1e-12;
+
 #define forn(i,e) for(ll i = 0; i < e; i++)
 #define forsn(i,s,e) for(ll i = s; i < e; i++)
 #define rforn(i,s) for(ll i = s; i >= 0; i--)
@@ -59,15 +59,26 @@ double eps = 1e-12;
  
 
 void solve(){
- 
+ double x,y;
+cin>>x>>y;
+double val1 = y * log10(x);
+double val2 =  x * log10(y);
+if(fabs(val1-val2) < 0.005f){
+    cout<<'='<<endl;
+}
+else if((val1-val2)>0){
+    cout<<'>'<<endl;
+}
+else if((val1-val2)<0){
+    cout<<'<'<<endl;
+}
+
 }
 int main()
 {
     fast_cin();
-    ll t;
-    cin >> t;
-    while(t--) {
+    
         solve();
-    }
+    
     return 0;
 }

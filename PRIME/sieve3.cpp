@@ -1,7 +1,7 @@
 #include<iostream>
 #include<vector>
 using namespace std;
-void isPrime(int n){
+bool isPrime(int n){
     vector<bool> obj(n+1,true);
     for(int i =2;i*i<=n;i++){
         if(obj[i]){
@@ -10,16 +10,12 @@ void isPrime(int n){
             }
         }
     }
-    for(int i =2;i<=n;i++){      
-        if(obj[i]){
-            cout<<i<<" ";
-        }
-    }
+    return obj[n];
 
 }
 int main(){
     int n;                          // time complexity  =  O(nloglogn)   no proof provided for calculating tc
     cin>>n;
-    isPrime(n);
+    cout<<isPrime(n);
 
 }

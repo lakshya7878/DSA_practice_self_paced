@@ -64,10 +64,40 @@ void solve(){
 int main()
 {
     fast_cin();
-    ll t;
-    cin >> t;
-    while(t--) {
-        solve();
+    int n,m,k;
+    cin>>n>>m>>k;
+    int laksh;
+    vector<bool> v(n+1,false);
+    
+    for(int i=0;i<m;i++){
+        cin>>laksh;
+        v[laksh] = true;
     }
+   
+    
+    int one;
+    int two;
+    int bonepos = 1;
+    
+   
+    for(int j=0;j<k;j++){
+        cin>>one;
+        cin>>two;
+        if((bonepos == one || bonepos == two)&& v[bonepos] == false){
+            
+            if(bonepos == one){
+                
+                bonepos = two;
+                
+            }
+            else{
+                
+                
+                bonepos = one;
+            }
+        }
+        
+    }
+    cout<<bonepos<<endl;
     return 0;
 }

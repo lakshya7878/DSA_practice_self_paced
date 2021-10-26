@@ -56,18 +56,34 @@ double eps = 1e-12;
 #define fast_cin() ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL)
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
- 
+ vector<int> freq(int arr[] , int n,vector<int> &v){
+     int count = 0;
+     
+     for(int i = 0; i < n; )
+     {  int j =i;
+         while(arr[i] ==arr[j] && i<n){
+             count++; 
+             i++;
+         }
+            if(arr[i]!=arr[j] || i==n){ 
+                v.pb(count);
+                count=0;
+                 
+            }
+     }
+     return v;
+ }
 
-void solve(){
- 
-}
 int main()
 {
     fast_cin();
-    ll t;
-    cin >> t;
-    while(t--) {
-        solve();
+    int arr[] = {3,3,5,5,1,1};
+    vector<int> v;
+    freq(arr,6,v);
+    for(auto i:v){
+        cout<<i<<endl;
     }
+    
+    
     return 0;
 }
