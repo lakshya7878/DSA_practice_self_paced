@@ -59,15 +59,33 @@ double eps = 1e-12;
  
 
 void solve(){
- 
+  int n,m;
+        cin>>n>>m;
+        int arr[m];
+        for(int i=0;i<m;i++){
+            cin>>arr[i];
+        }
+        int i=0;
+        int j=n-1;
+        int diff =INT_MAX;
+        int d ;
+        sort(arr,arr + m);
+        while(j<m && i<m){
+            d = arr[j] - arr[i];
+            
+            diff = min(diff,d);
+            i++; 
+            j++;
+        }
+        cout<<diff<<endl;
 }
 int main()
 {
     fast_cin();
-    ll t;
-    cin >> t;
-    while(t--) {
+    
+    
+    
         solve();
-    }
+    
     return 0;
 }

@@ -59,7 +59,25 @@ double eps = 1e-12;
  
 
 void solve(){
- 
+ string s;
+ cin>>s;
+ char min = s[0];
+ for(int i=0;i<s.size();i++){
+    if(s[i]<min){
+        min = s[i];
+    }
+ }
+int flag =0;
+cout<<min<<" ";
+for(int i=0;i<s.size();i++){
+    if(s[i]==min&& flag!=1){
+        flag = 1;
+        continue;
+
+    }
+    cout<<s[i];
+}
+cout<<endl;
 }
 int main()
 {

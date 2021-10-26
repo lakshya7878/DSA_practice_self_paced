@@ -57,17 +57,26 @@ double eps = 1e-12;
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
  
+int profit(int arr[],int n){
+    int buy =0;
+    int buypos = INT_MAX;
+    int profit = 0;
+    for(int i=1;i<n;i++){
+        
+        if(arr[i]>=arr[i-1]){
+            profit =profit + (arr[i]-arr[i-1]);
+        }
+          
+        
+    }
+    return profit;
 
-void solve(){
- 
 }
+
 int main()
 {
     fast_cin();
-    ll t;
-    cin >> t;
-    while(t--) {
-        solve();
-    }
+    int arr[] = {9,6,3,4,2,6,100};
+    cout<<profit(arr,7);
     return 0;
 }

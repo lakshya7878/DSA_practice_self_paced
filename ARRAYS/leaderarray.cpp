@@ -1,3 +1,6 @@
+// ascending order -> only 1 leader(last one)
+//descending order ->n leaders
+
 #pragma GCC optimize("Ofast")
 #pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,avx2,fma")
 #pragma GCC optimize("unroll-loops")
@@ -56,18 +59,27 @@ double eps = 1e-12;
 #define fast_cin() ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL)
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
- 
+ int leaders(int arr[],int n){
+     int temp =0;
+     int count =1;
+     int p =n;
+     for(int i=n-1;i>=0;i--){
+         if(arr[i]>arr[p]){
+             
+             count++;
+             p=i;
 
-void solve(){
- 
-}
+         }
+        
+     }
+     return count;
+ }
+
+
 int main()
 {
     fast_cin();
-    ll t;
-    cin >> t;
-    while(t--) {
-        solve();
-    }
+    int arr[] = {3,4,5,6,7,8,9};
+    cout<<leaders(arr,6);
     return 0;
 }
