@@ -57,19 +57,27 @@ double eps = 1e-12;
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
  
+int median(int A[],int N)
+    {
+        
+        sort(A,A+N);
+        if(N&1){
+            int p = (N/2) ;
+            
+            return A[p];
+        }
+        else{
+            int avg = A[N/2] + A[(N/2)+1];
+            avg =avg/2;
+            return avg;
+        }
 
-void solve()
-{
-  cout<<"hello world"<<endl;
-}
+        
+    }
 int main()
 {
     fast_cin();
-    ll t;
-    cin >> t;
-    while(t--) 
-    {
-       solve();
-    }
+    int A[] ={1,2,19,28,5};
+    cout<<median(A,5);
     return 0;
 }

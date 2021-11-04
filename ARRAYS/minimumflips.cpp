@@ -57,29 +57,24 @@ double eps = 1e-12;
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
  
-int storewater(int arr[],int n){
-    int leftmax[n];
-    int rightmax[n];
-    int ans = 0;
-    leftmax[0] = arr[0];
-    rightmax[n-1] = arr[n-1];
-    for(int i=1;i<n;i++){
-        leftmax[i] = max(leftmax[i-1],arr[i]);
-    }
-    for(int i=n-2;i>=0;i--){
-        rightmax[i] = max(rightmax[i+1],arr[i]);
-    }
-    for(int i=1;i<=n-2;i++){
-        ans = ans + min(leftmax[i],rightmax[i]) - arr[i];
-    }
-    return ans;
+ int flips(int arr[],int n){
+     int group1 =0;
+     int group2 =0;
+     for(int i=0;i<n;i++){
+         if(arr[i]==0){
+             group1++;
+             while(arr[i]==0){
+                i++;
+             }
+         }
+     }
+ }
 
-}
 
 int main()
 {
     fast_cin();
-    int arr[] ={1,2,3,4,5};
-    cout<<storewater(arr,5);
+    int arr[]  = {1,0,1,1,1,0,0,0,1};
+    cout<<flips(arr,9);
     return 0;
 }

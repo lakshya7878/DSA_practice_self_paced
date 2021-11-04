@@ -57,29 +57,55 @@ double eps = 1e-12;
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
  
-int storewater(int arr[],int n){
-    int leftmax[n];
-    int rightmax[n];
-    int ans = 0;
-    leftmax[0] = arr[0];
-    rightmax[n-1] = arr[n-1];
-    for(int i=1;i<n;i++){
-        leftmax[i] = max(leftmax[i-1],arr[i]);
-    }
-    for(int i=n-2;i>=0;i--){
-        rightmax[i] = max(rightmax[i+1],arr[i]);
-    }
-    for(int i=1;i<=n-2;i++){
-        ans = ans + min(leftmax[i],rightmax[i]) - arr[i];
-    }
-    return ans;
+ int contievenodd(int arr[], int n){
+     int m=1;
+     int count =1;
+     for(int i=0;i<n-1;i++){
+         if((arr[i]&1)&(arr[i+1]&1)){
+             
+             count =1;
+         }
+         else if((arr[i]%2==0)&&(arr[i+1]%2==0)){
+             
+             count =1;
+         }
+         else{
 
-}
+         count++;
+         m = max(m,count);
+
+         }
+         
+     }
+     return m;
+ }
+
+//  int maxEvenOdd(int arr[], int n)
+// {
+// 	int res = 1;
+// 	int curr = 1;
+
+// 	for(int i = 1; i < n; i++)
+// 	{
+// 			if((arr[i] % 2 == 0 && arr[i - 1] % 2 != 0)
+// 			   ||(arr[i] % 2 != 0 && arr[i - 1] % 2 == 0))
+// 				{
+// 					curr++;
+
+// 					res = max(res, curr);
+// 				}
+// 				else
+// 					curr = 1;
+// 	}
+	
+// 	return res;
+// }
+
 
 int main()
 {
     fast_cin();
-    int arr[] ={1,2,3,4,5};
-    cout<<storewater(arr,5);
+    int arr[] {5,4};
+    cout<<contievenodd(arr,2);
     return 0;
 }

@@ -57,29 +57,24 @@ double eps = 1e-12;
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
  
-int storewater(int arr[],int n){
-    int leftmax[n];
-    int rightmax[n];
-    int ans = 0;
-    leftmax[0] = arr[0];
-    rightmax[n-1] = arr[n-1];
-    for(int i=1;i<n;i++){
-        leftmax[i] = max(leftmax[i-1],arr[i]);
+int maxwindow(int arr[],int k,int n){
+    int sum =0;
+    int maxsum = INT_MIN;
+    for(int i=0;i<k;i++){
+        sum = sum+arr[i];
     }
-    for(int i=n-2;i>=0;i--){
-        rightmax[i] = max(rightmax[i+1],arr[i]);
+    for(int i=k;i<n;i++){
+        sum = sum + arr[i] - arr[i-k];
+        maxsum = max(maxsum , sum);
     }
-    for(int i=1;i<=n-2;i++){
-        ans = ans + min(leftmax[i],rightmax[i]) - arr[i];
-    }
-    return ans;
-
+    return maxsum;
 }
 
 int main()
 {
     fast_cin();
-    int arr[] ={1,2,3,4,5};
-    cout<<storewater(arr,5);
+    int arr[]  = {1,3,5,3,2,6,8,6};
+    int k=3;
+    cout<<maxwindow(arr,k,8);
     return 0;
 }

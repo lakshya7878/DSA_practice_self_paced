@@ -57,29 +57,28 @@ double eps = 1e-12;
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
  
-int storewater(int arr[],int n){
-    int leftmax[n];
-    int rightmax[n];
-    int ans = 0;
-    leftmax[0] = arr[0];
-    rightmax[n-1] = arr[n-1];
-    for(int i=1;i<n;i++){
-        leftmax[i] = max(leftmax[i-1],arr[i]);
-    }
-    for(int i=n-2;i>=0;i--){
-        rightmax[i] = max(rightmax[i+1],arr[i]);
-    }
-    for(int i=1;i<=n-2;i++){
-        ans = ans + min(leftmax[i],rightmax[i]) - arr[i];
-    }
-    return ans;
-
+bool anagram(string s1,string s2){
+    vector<int> vec(26,0);
+    if(s1.length()==s2.length()){
+        for(int i=0;i<s1.length();i++){
+            vec[s1[i]-'a']++;
+            vec[s2[i]-'a']--;
+        }
+   for(int j=0;j<26;j++){
+       if(vec[j]!=0) return false;
+   }
+   return true;
+}
+else {
+    return false;
+}
 }
 
 int main()
 {
     fast_cin();
-    int arr[] ={1,2,3,4,5};
-    cout<<storewater(arr,5);
+    string s1 = "abcde";
+    string s2 = "abced";
+    cout<<anagram(s1,s2)<<endl;
     return 0;
 }

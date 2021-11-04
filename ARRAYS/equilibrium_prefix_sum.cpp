@@ -57,29 +57,45 @@ double eps = 1e-12;
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
  
-int storewater(int arr[],int n){
-    int leftmax[n];
-    int rightmax[n];
-    int ans = 0;
-    leftmax[0] = arr[0];
-    rightmax[n-1] = arr[n-1];
-    for(int i=1;i<n;i++){
-        leftmax[i] = max(leftmax[i-1],arr[i]);
-    }
-    for(int i=n-2;i>=0;i--){
-        rightmax[i] = max(rightmax[i+1],arr[i]);
-    }
-    for(int i=1;i<=n-2;i++){
-        ans = ans + min(leftmax[i],rightmax[i]) - arr[i];
-    }
-    return ans;
+ void prefix_sum(int arr[],int n,int pre_sum[]){
+     pre_sum[0] = arr[0];
+     for(int i=1;i<n;i++){
+         pre_sum[i] = pre_sum[i-1] + arr[i];
+     }
+ }
 
-}
+ 
+
+ void equilibrium(int pre_sum[],int n){
+     
+     int left ;
+    int right ;
+    for(int i=0;i<n;i++){
+        
+        if(i==0){
+            left = 0;
+            right = pre_sum[n-1]-pre_sum[0];
+        }
+        else if(i==n-1){
+            right =0;
+            left = pre_sum[n-2];
+        }
+        else{
+            left =  pre_sum[i-1];
+            right = pre_sum[n-1] - pre_sum[i];
+        }
+        if(left == right){
+            cout<<i<<endl;
+        }
+    }
+ }
 
 int main()
 {
     fast_cin();
-    int arr[] ={1,2,3,4,5};
-    cout<<storewater(arr,5);
+    int arr[] = {1,2,-1,1,2};
+    int pre_sum[5];
+    prefix_sum(arr,5,pre_sum);
+    equilibrium(pre_sum,5);
     return 0;
 }

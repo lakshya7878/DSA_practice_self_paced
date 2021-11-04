@@ -56,30 +56,48 @@ double eps = 1e-12;
 #define fast_cin() ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL)
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
- 
-int storewater(int arr[],int n){
-    int leftmax[n];
-    int rightmax[n];
-    int ans = 0;
-    leftmax[0] = arr[0];
-    rightmax[n-1] = arr[n-1];
-    for(int i=1;i<n;i++){
-        leftmax[i] = max(leftmax[i-1],arr[i]);
-    }
-    for(int i=n-2;i>=0;i--){
-        rightmax[i] = max(rightmax[i+1],arr[i]);
-    }
-    for(int i=1;i<=n-2;i++){
-        ans = ans + min(leftmax[i],rightmax[i]) - arr[i];
-    }
-    return ans;
+ int freq(int arr[],int n, int index){
+         int count =0;
+     for(int i=0;i<n;i++){
+         if(arr[i]==arr[index]){
+             count++;
+         }
+     }
+     if(count>=((n/2)+1)){
+         return arr[index];
+     }
+     else{
+         return -1;
+     }
+     
+ }
+  int moore_majority(int arr[],int n){
+     int candidate_index = 0;
+     int count =1;
+     for(int i=1;i<n;i++){
+         if(arr[i] == arr[candidate_index]){
+             count++;
+         }
+         else {
+             count--;
+         }
+         if(count ==0){
+             candidate_index = i;
+             count =1;
+         }
+     }
+     return freq(arr,4,candidate_index);
+     
+ }
 
-}
+ 
+
 
 int main()
 {
+
     fast_cin();
-    int arr[] ={1,2,3,4,5};
-    cout<<storewater(arr,5);
+    int arr[]  = {3,3,5,5};
+    cout<<moore_majority(arr,4);
     return 0;
 }

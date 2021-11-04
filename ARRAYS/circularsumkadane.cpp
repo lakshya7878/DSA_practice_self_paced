@@ -57,29 +57,41 @@ double eps = 1e-12;
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
  
-int storewater(int arr[],int n){
-    int leftmax[n];
-    int rightmax[n];
-    int ans = 0;
-    leftmax[0] = arr[0];
-    rightmax[n-1] = arr[n-1];
+int lineararrsum(int arr[], int n){  // linear max sum
+    int curr_sum = arr[0];
+    int max_sum = arr[0];
     for(int i=1;i<n;i++){
-        leftmax[i] = max(leftmax[i-1],arr[i]);
+        curr_sum = max(curr_sum +arr[i],arr[i]);
+        max_sum = max(max_sum , curr_sum);
     }
-    for(int i=n-2;i>=0;i--){
-        rightmax[i] = max(rightmax[i+1],arr[i]);
-    }
-    for(int i=1;i<=n-2;i++){
-        ans = ans + min(leftmax[i],rightmax[i]) - arr[i];
-    }
-    return ans;
+    return max_sum;
 
+}
+
+int overallsum(int arr[],int n){
+    int ans = lineararrsum(arr,n);
+    if(ans<0){
+        return ans;
+    }
+
+    //now the circular max sum
+    // we know that sum(arr) - min(sum(arr)) -> max circular subarray sum
+    int sum  =0;
+    for(int i=0;i<n;i++){
+        sum += arr[i];
+        arr[i]*=-1;
+    }
+    // now we will calculate minimum sum
+    int min_sum = -1*(lineararrsum(arr,n));
+    int circular_sum = sum - min_sum;
+    ans = max(ans , circular_sum);
+    return ans;
 }
 
 int main()
 {
     fast_cin();
-    int arr[] ={1,2,3,4,5};
-    cout<<storewater(arr,5);
+    int arr[] = {-5,-3};
+    cout<<overallsum(arr,2);
     return 0;
 }
