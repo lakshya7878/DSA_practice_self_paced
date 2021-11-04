@@ -1,3 +1,4 @@
+//this solution is in O(n) time and O(1) space
 #pragma GCC optimize("Ofast")
 #pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,avx2,fma")
 #pragma GCC optimize("unroll-loops")
@@ -57,29 +58,32 @@ double eps = 1e-12;
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
  
-int storewater(int arr[],int n){
-    int leftmax[n];
-    int rightmax[n];
-    int ans = 0;
-    leftmax[0] = arr[0];
-    rightmax[n-1] = arr[n-1];
-    for(int i=1;i<n;i++){
-        leftmax[i] = max(leftmax[i-1],arr[i]);
-    }
-    for(int i=n-2;i>=0;i--){
-        rightmax[i] = max(rightmax[i+1],arr[i]);
-    }
-    for(int i=1;i<=n-2;i++){
-        ans = ans + min(leftmax[i],rightmax[i]) - arr[i];
-    }
-    return ans;
+ void equilibrium(int arr[] , int n){
+     int arr_sum = 0;
+     for(int i=0;i<n;i++){
+         arr_sum += arr[i];
+     }
+     int curr_sum =arr[0];
+     if(arr_sum - arr[0] ==0){
+         cout<<0<<endl;
+     }
+     if(arr_sum - arr[n-1] ==0){
+         cout<<n-1<<endl;
+     }
+     for(int i=1;i<n-1;i++){
+         cout<<curr_sum<<"sum"<<endl;
+         if(curr_sum == (arr_sum-(arr[i]+curr_sum))){
+             cout<<i<<endl;
+         }
+         curr_sum += arr[i];
+     }
+ }
 
-}
 
 int main()
 {
     fast_cin();
-    int arr[] ={1,2,3,4,5};
-    cout<<storewater(arr,5);
+    int arr[] = {1,2,3,2,1};
+    equilibrium(arr, 5);
     return 0;
 }

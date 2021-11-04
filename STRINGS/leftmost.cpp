@@ -57,29 +57,42 @@ double eps = 1e-12;
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
  
-int storewater(int arr[],int n){
-    int leftmax[n];
-    int rightmax[n];
-    int ans = 0;
-    leftmax[0] = arr[0];
-    rightmax[n-1] = arr[n-1];
-    for(int i=1;i<n;i++){
-        leftmax[i] = max(leftmax[i-1],arr[i]);
-    }
-    for(int i=n-2;i>=0;i--){
-        rightmax[i] = max(rightmax[i+1],arr[i]);
-    }
-    for(int i=1;i<=n-2;i++){
-        ans = ans + min(leftmax[i],rightmax[i]) - arr[i];
-    }
-    return ans;
+ char leftmost(string str){
+     vector<int> vec(26,0);
+     for(int i=0;i<str.length();i++){
+         vec[str[i]-'a']++;
+     }
+     for(int i=0;i<str.length();i++){
+         if(vec[str[i]-'a']>1){
+             return str[i];
+         }
+     }
+     return '@'; // no such element
+ }
 
-}
+ // one more  apprach is give below :
+
+ int leftmost2(string str){
+     int res = INT_MAX;
+     vector<int> vec(256,-1);
+     for(int i=0;i<str.length();i++){
+         
+         if(vec[str[i]]==-1){
+             vec[str[i]] = i;
+             
+         }
+         else{
+             res = min(res,vec[str[i]]);
+         }
+     }
+     return (res==INT_MAX) ? -1 : res;
+ }
+
 
 int main()
 {
     fast_cin();
-    int arr[] ={1,2,3,4,5};
-    cout<<storewater(arr,5);
+    string str = "abbc";
+    cout<<leftmost2(str);
     return 0;
 }

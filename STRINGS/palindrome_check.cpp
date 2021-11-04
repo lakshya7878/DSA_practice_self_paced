@@ -1,3 +1,7 @@
+// naive method is to reverse the  string and then compare it with the original string
+// i.e. rev = reverse(str.begin(),str.end())   and then check if (rev == str)
+// which is O(n) in time and space
+
 #pragma GCC optimize("Ofast")
 #pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,avx2,fma")
 #pragma GCC optimize("unroll-loops")
@@ -57,29 +61,23 @@ double eps = 1e-12;
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
  
-int storewater(int arr[],int n){
-    int leftmax[n];
-    int rightmax[n];
-    int ans = 0;
-    leftmax[0] = arr[0];
-    rightmax[n-1] = arr[n-1];
-    for(int i=1;i<n;i++){
-        leftmax[i] = max(leftmax[i-1],arr[i]);
-    }
-    for(int i=n-2;i>=0;i--){
-        rightmax[i] = max(rightmax[i+1],arr[i]);
-    }
-    for(int i=1;i<=n-2;i++){
-        ans = ans + min(leftmax[i],rightmax[i]) - arr[i];
-    }
-    return ans;
+bool palicheck(string str, int n){
+    int i=0;
+    int j= n-1;
+    while(i<j){
+        if(str[i]!=str[j]) return false;
+        i++;
+        j--; 
 
+    }
+    return true;
 }
 
 int main()
 {
     fast_cin();
-    int arr[] ={1,2,3,4,5};
-    cout<<storewater(arr,5);
+    string str = "lakshya";
+    cout<<palicheck(str,str.length());
+    
     return 0;
 }

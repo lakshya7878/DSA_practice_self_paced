@@ -57,29 +57,39 @@ double eps = 1e-12;
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
  
-int storewater(int arr[],int n){
-    int leftmax[n];
-    int rightmax[n];
-    int ans = 0;
-    leftmax[0] = arr[0];
-    rightmax[n-1] = arr[n-1];
+void flips(int arr[], int n){
     for(int i=1;i<n;i++){
-        leftmax[i] = max(leftmax[i-1],arr[i]);
+        if(arr[i]!=arr[i-1]){
+            if(arr[i]!=arr[0]){
+                cout<<"from "<<i<<" to ";
+            }
+            else{
+                cout<<i-1<<endl;
+            }
+        }
     }
-    for(int i=n-2;i>=0;i--){
-        rightmax[i] = max(rightmax[i+1],arr[i]);
+    if(arr[n-1]!= arr[0]){
+        cout<<n-1<<endl;
     }
-    for(int i=1;i<=n-2;i++){
-        ans = ans + min(leftmax[i],rightmax[i]) - arr[i];
-    }
-    return ans;
-
 }
 
 int main()
 {
     fast_cin();
-    int arr[] ={1,2,3,4,5};
-    cout<<storewater(arr,5);
+    int arr[] = {0,0,0,0,0,0,1,1,1};
+    flips(arr,9);
     return 0;
 }
+
+//watch the video again you will get a better idea of what this does
+
+// we will always flip the 2nd,4th,6th and so on(the groups that we find)
+// this way we will  get the least flip in all the cases 
+//even if both 0 and 1 require equal flips this way we get the  correct answer
+
+// the first if condition identifies whether a new group started or not
+//the second if confirms that if whether it is the starting or the ending of the new group (else)
+
+// the  last if outside the for loop is for the case {1,1,1,0,0,0,1,1,0,0,0}
+//as in this case there is no triggering 1 to tell that the last 0 group has ended 
+//this will only occur in the case when  both flips are equal as in this case
