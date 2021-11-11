@@ -56,59 +56,43 @@ double eps = 1e-12;
 #define fast_cin() ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL)
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
- 
- char leftmost(string str){
-     vector<int> vec(26,0);
-     for(int i=0;i<str.length();i++){
-         vec[str[i]-'a']++;
-     }
-     for(int i=0;i<str.length();i++){
-         if(vec[str[i]-'a']>1){
-             return str[i];
-         }
-     }
-     return '@'; // no such element
- }
+ // we have made 2 256 sized array which saves the frequency of characters of both the arrays and the freq1 saves the frequency of every window of size m and sends to the function areSame to check whether they are anagram or not.
+void areSame(vector<int> freq1, vector<int> freq2,int pos){
+    int flag =1;
+    for(int i=0;i<256;i++){
+        if(freq1[i]!= freq2[i]){
+            flag =0;
+            break;
+        }
+    }
+    if(flag==1) cout<<pos<<endl;
 
- // one more  apprach is give below :
-//basic approach is to compare the first appearence indexes of elements that are 
-// appearing more than once
- int leftmost2(string str){
-     int res = INT_MAX;
-     vector<int> vec(256,-1);
-     for(int i=0;i<str.length();i++){
-         
-         if(vec[str[i]]==-1){
-             vec[str[i]] = i;
-             
-         }
-         else{
-             res = min(res,vec[str[i]]);
-         }
-     }
-     return (res==INT_MAX) ? -1 : res;
- }
+    
+}
 
- int leftmost3(string str){
-     vector<bool> vec(256,false);
-     int res = -1;
-     for(int i=str.length()-1;i>=0;i--){
-         if(vec[str[i]]==false){
-             
-             vec[str[i]]=true;
-         }
-         else{
-             res = i;
-         }
-     }
-     return res;
- }
 
+ void check_anagram(string &txt, string &pat){
+     vector<int> freq1(256,0);
+     vector<int> freq2(256,0);
+     int n=txt.length();
+     int m= pat.length();
+     for(int i=0;i<m;i++){
+         freq1[txt[i]]++;
+         freq2[pat[i]]++;
+     }
+    areSame(freq1,freq2,0);
+    for(int i=m;i<n;i++){
+        freq1[txt[i]]++;
+        freq1[txt[i-m]]--;
+        areSame(freq1,freq2,i-m+1);
+    }
+ }
 
 int main()
 {
     fast_cin();
-    string str = "aabbc";
-    cout<<leftmost3(str);
+    string txt = "lakshyasharma";
+    string pat = "hsa";
+    check_anagram(txt,pat);
     return 0;
 }

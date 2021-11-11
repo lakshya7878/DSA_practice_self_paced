@@ -56,59 +56,39 @@ double eps = 1e-12;
 #define fast_cin() ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL)
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
- 
- char leftmost(string str){
-     vector<int> vec(26,0);
-     for(int i=0;i<str.length();i++){
-         vec[str[i]-'a']++;
-     }
-     for(int i=0;i<str.length();i++){
-         if(vec[str[i]-'a']>1){
-             return str[i];
-         }
-     }
-     return '@'; // no such element
- }
-
- // one more  apprach is give below :
-//basic approach is to compare the first appearence indexes of elements that are 
-// appearing more than once
- int leftmost2(string str){
-     int res = INT_MAX;
-     vector<int> vec(256,-1);
-     for(int i=0;i<str.length();i++){
-         
-         if(vec[str[i]]==-1){
-             vec[str[i]] = i;
-             
-         }
-         else{
-             res = min(res,vec[str[i]]);
-         }
-     }
-     return (res==INT_MAX) ? -1 : res;
- }
-
- int leftmost3(string str){
-     vector<bool> vec(256,false);
-     int res = -1;
-     for(int i=str.length()-1;i>=0;i--){
-         if(vec[str[i]]==false){
-             
-             vec[str[i]]=true;
-         }
-         else{
-             res = i;
-         }
-     }
-     return res;
- }
-
 
 int main()
 {
     fast_cin();
-    string str = "aabbc";
-    cout<<leftmost3(str);
+    ll t;
+    cin >> t;
+    while(t--) {
+        ll n;
+        cin>>n;
+        ll arr[n];
+        forn(i,n){
+            cin>>arr[i];
+        }
+        // sort(arr,arr+n);
+        // int temp = arr[n-1];
+        // int temp2;
+        // for(int i=0;i<n;i++){
+        //     temp2 = temp;
+        //     temp = temp&arr[0];
+        //     if(temp==temp2){
+        //         break;
+        //     }
+        //     arr[n-1] = temp;
+        //     sort(arr,arr+n);
+        // }
+        // cout<<temp<<endl;
+        // int x =11& 7& 15& 3& 75;
+        // cout<<x<<endl;
+        ll an = arr[0];
+        for(int i=0;i<n;i++){
+            an = an&arr[i];
+        }
+        cout<<an<<endl;
+    }
     return 0;
 }

@@ -57,58 +57,39 @@ double eps = 1e-12;
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
  
- char leftmost(string str){
-     vector<int> vec(26,0);
-     for(int i=0;i<str.length();i++){
-         vec[str[i]-'a']++;
-     }
-     for(int i=0;i<str.length();i++){
-         if(vec[str[i]-'a']>1){
-             return str[i];
-         }
-     }
-     return '@'; // no such element
- }
-
- // one more  apprach is give below :
-//basic approach is to compare the first appearence indexes of elements that are 
-// appearing more than once
- int leftmost2(string str){
-     int res = INT_MAX;
-     vector<int> vec(256,-1);
-     for(int i=0;i<str.length();i++){
-         
-         if(vec[str[i]]==-1){
-             vec[str[i]] = i;
-             
-         }
-         else{
-             res = min(res,vec[str[i]]);
-         }
-     }
-     return (res==INT_MAX) ? -1 : res;
- }
-
- int leftmost3(string str){
-     vector<bool> vec(256,false);
-     int res = -1;
-     for(int i=str.length()-1;i>=0;i--){
-         if(vec[str[i]]==false){
-             
-             vec[str[i]]=true;
-         }
-         else{
-             res = i;
-         }
-     }
-     return res;
- }
-
 
 int main()
 {
     fast_cin();
-    string str = "aabbc";
-    cout<<leftmost3(str);
+    ll t;
+    cin >> t;
+    while(t--) {
+        int n;
+        cin>>n;
+        int arr[n];
+        int zer =0;
+        int one=0;
+        forn(i,n){
+            cin>>arr[i];
+            if(arr[i]==0){
+                zer++;
+            }
+            else if(arr[i]==1){
+                one++;
+            }
+        }
+        
+       
+            cout<<(1ll<<zer)*one<<endl;
+        
+        // the << sign in the bracket is not of cout it is left shift which means that we are basically calculating 2^zer because we are shifting 1 by zer so if we write 1 << 3 it means in binary 0001 -> 1000 which is 2^3 -8 also 1LL means 1 in long long , 2ll means 2 in long long. this is deone to prevent overflow. because if we shift 1 by left more than 32 times which is (int) then we will need to convert it into long long to calculate the right answer 
+
+        // so line 83 can also be replaced with 
+        //long long zerr = zer;
+        // long long ans1 = pow(2,zerr);
+        //     cout<<ans1*one<<endl;
+        
+
+    }
     return 0;
 }
