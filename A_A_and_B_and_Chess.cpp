@@ -57,58 +57,58 @@ double eps = 1e-12;
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
  
- char leftmost(string str){
-     vector<int> vec(26,0);
-     for(int i=0;i<str.length();i++){
-         vec[str[i]-'a']++;
-     }
-     for(int i=0;i<str.length();i++){
-         if(vec[str[i]-'a']>1){
-             return str[i];
-         }
-     }
-     return '@'; // no such element
- }
-
- // one more  apprach is give below :
-//basic approach is to compare the first appearence indexes of elements that are 
-// appearing more than once
- int leftmost2(string str){
-     int res = INT_MAX;
-     vector<int> vec(256,-1);
-     for(int i=0;i<str.length();i++){
-         
-         if(vec[str[i]]==-1){
-             vec[str[i]] = i;
-             
-         }
-         else{
-             res = min(res,vec[str[i]]);
-         }
-     }
-     return (res==INT_MAX) ? -1 : res;
- }
-
- int leftmost3(string str){
-     vector<bool> vec(256,false);
-     int res = -1;
-     for(int i=str.length()-1;i>=0;i--){
-         if(vec[str[i]]==false){
-             
-             vec[str[i]]=true;
-         }
-         else{
-             res = i;
-         }
-     }
-     return res;
- }
-
 
 int main()
 {
     fast_cin();
-    string str = "aabbc";
-    cout<<leftmost3(str);
-    return 0;
+    char arr[8][8];
+    int black = 0;
+    int white = 0;
+    for(int i=0;i<8;i++){
+        for(int j=0;j<8;j++){
+            cin>>arr[i][j];
+            if(arr[i][j]=='q'){
+                black = black+9;
+            }
+            else if(arr[i][j]=='Q'){
+                white +=9;
+            }
+            if(arr[i][j]=='r'){
+                black = black+5;
+            }
+            else if(arr[i][j]=='R'){
+                white +=5;
+            }
+            if(arr[i][j]=='b'){
+                black = black+3;
+            }
+            else if(arr[i][j]=='B'){
+                white +=3;
+            }
+            if(arr[i][j]=='n'){
+                black = black+3;
+            }
+            else if(arr[i][j]=='N'){
+                white +=3;
+            }
+            if(arr[i][j]=='p'){
+                black = black+1;
+            }
+            else if(arr[i][j]=='P'){
+                white +=1;
+            }
+            
+        }
+
+    }
+    if(black>white){
+        cout<<"Black"<<endl;
+    }
+    else if(white>black){
+        cout<<"White"<<endl;
+    }
+    else{
+        cout<<"Draw"<<endl;
+    }
+        return 0;
 }

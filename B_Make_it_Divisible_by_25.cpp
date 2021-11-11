@@ -41,6 +41,7 @@ int countmove(int n,int num){
         if(n%10 != dig){
             n/=10;
             count++;
+
         }
         
         if(n%10==dig){

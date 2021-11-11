@@ -57,58 +57,75 @@ double eps = 1e-12;
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
  
- char leftmost(string str){
-     vector<int> vec(26,0);
-     for(int i=0;i<str.length();i++){
-         vec[str[i]-'a']++;
-     }
-     for(int i=0;i<str.length();i++){
-         if(vec[str[i]-'a']>1){
-             return str[i];
-         }
-     }
-     return '@'; // no such element
- }
-
- // one more  apprach is give below :
-//basic approach is to compare the first appearence indexes of elements that are 
-// appearing more than once
- int leftmost2(string str){
-     int res = INT_MAX;
-     vector<int> vec(256,-1);
-     for(int i=0;i<str.length();i++){
-         
-         if(vec[str[i]]==-1){
-             vec[str[i]] = i;
-             
-         }
-         else{
-             res = min(res,vec[str[i]]);
-         }
-     }
-     return (res==INT_MAX) ? -1 : res;
- }
-
- int leftmost3(string str){
-     vector<bool> vec(256,false);
-     int res = -1;
-     for(int i=str.length()-1;i>=0;i--){
-         if(vec[str[i]]==false){
-             
-             vec[str[i]]=true;
-         }
-         else{
-             res = i;
-         }
-     }
-     return res;
- }
-
 
 int main()
 {
     fast_cin();
-    string str = "aabbc";
-    cout<<leftmost3(str);
+    ll t;
+    cin >> t;
+    while(t--) {
+        int n;
+        cin>>n;
+        char arr[n];
+        int r_evenpos =0;
+        int b_evenpos =0;
+        int r_oddpos =0;
+        int b_oddpos =0;
+        forn(i,n){
+            cin>>arr[i];
+           
+        }
+        int i=0;
+        for(i;i<n;i++){
+            if(arr[i]!='?'){
+                break;
+            }
+        }
+        int rev = i-1;
+        if(i<n){
+            
+        for(rev ;rev>=0;rev--){
+            if(arr[rev+1]=='R'){
+                arr[rev] = 'B';
+            }
+            else{
+                arr[rev] = 'R';
+            }
+        }
+        for(i+1;i<n;i++){
+            if(arr[i]=='?'){
+                if(arr[i-1]=='R'){
+                    arr[i]='B';
+                }
+                else{
+                    arr[i] = 'R';
+                }
+            }
+        }
+        
+        i=0;
+        }
+        else if(i==n){
+            
+            for(int j=0;j<n;j++){
+                if(j&1){
+                    arr[j]= 'B';
+                }
+                else{
+                    arr[j]='R';
+                }
+            }
+        }
+
+
+
+
+        
+        forn(i,n){
+            cout<<arr[i];
+        }
+        cout<<'\n';
+
+    }
     return 0;
 }

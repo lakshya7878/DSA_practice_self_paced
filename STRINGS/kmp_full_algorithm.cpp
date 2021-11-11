@@ -57,58 +57,58 @@ double eps = 1e-12;
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
  
- char leftmost(string str){
-     vector<int> vec(26,0);
-     for(int i=0;i<str.length();i++){
-         vec[str[i]-'a']++;
-     }
-     for(int i=0;i<str.length();i++){
-         if(vec[str[i]-'a']>1){
-             return str[i];
-         }
-     }
-     return '@'; // no such element
- }
+void lpsfill(string &pat, int lps[]){
+    int i=1;
+    int len=0;
+    lps[0] =0;
+    while(i<pat.length()){
+        if(pat[i]==pat[len]) {
+            len++;
+            lps[i] = len;
+            i++;
+        }
+        else{
+            if(len==0){
+                lps[i] =0;
+                i++;
+            }
+            else{
+                len = lps[len-1];
+            }
+        }
+    }
+}
 
- // one more  apprach is give below :
-//basic approach is to compare the first appearence indexes of elements that are 
-// appearing more than once
- int leftmost2(string str){
-     int res = INT_MAX;
-     vector<int> vec(256,-1);
-     for(int i=0;i<str.length();i++){
-         
-         if(vec[str[i]]==-1){
-             vec[str[i]] = i;
-             
-         }
-         else{
-             res = min(res,vec[str[i]]);
-         }
-     }
-     return (res==INT_MAX) ? -1 : res;
- }
-
- int leftmost3(string str){
-     vector<bool> vec(256,false);
-     int res = -1;
-     for(int i=str.length()-1;i>=0;i--){
-         if(vec[str[i]]==false){
-             
-             vec[str[i]]=true;
-         }
-         else{
-             res = i;
-         }
-     }
-     return res;
- }
+void find_pat(string &txt, string &pat){
+    int lps[pat.length()];
+    int n =txt.length();
+    int m=pat.length();
+    lpsfill(pat,lps);
+    int i=0,j=0;
+    while(i<txt.length()){
+        if(txt[i]==pat[j]){
+            i++;j++;
+        }
+        if(j==m){
+            cout<<i-m<<" ";
+            j = lps[j-1];
+        }
+        else if(i<txt.length()&& txt[i]!=pat[j]){
+            if(j==0) i++;
+            else{
+                j = lps[j-1];
+            }
+        }
+    }
+    cout<<endl;
+}
 
 
 int main()
 {
     fast_cin();
-    string str = "aabbc";
-    cout<<leftmost3(str);
+    string txt = "aabaaacabaaac";
+    string pat = "aaac";
+    find_pat(txt,pat);
     return 0;
 }
