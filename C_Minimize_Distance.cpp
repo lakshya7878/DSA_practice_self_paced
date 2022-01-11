@@ -16,25 +16,25 @@ typedef vector<pl> vpl;
 typedef vector<pii> vpi;
 
 
-double      eps = 1e-12;
-#define     mod1 1000000007
-#define     mod2 998244353
-#define     forn(i,e) for(ll i = 0; i < e; i++)
-#define     rforn(i,s) for(ll i = s; i >= 0; i--)
-#define     forsn(i,s,e) for(ll i = s; i < e; i++)
-#define     rforsn(i,s,e) for(ll i = s; i >= e; i--)
-#define     ln "\n"
-#define     yes cout << "YES\n"
-#define     no cout << "NO\n"
-#define     mp make_pair
-#define     pb push_back
-#define     ff first
-#define     ss second
-#define     INF 2e18
-#define     fast_cin() ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL)
-#define     all(x) (x).begin(), (x).end()
-#define     sz(x) ((ll)(x).size())
-#define     inf 1000000000000000005
+double eps = 1e-12;
+#define MOD1 1000000007
+#define MOD2 998244353
+#define forn(i,e) for(ll i = 0; i < e; i++)
+#define rforn(i,s) for(ll i = s; i >= 0; i--)
+#define forsn(i,s,e) for(ll i = s; i < e; i++)
+#define rforsn(i,s,e) for(ll i = s; i >= e; i--)
+#define ln "\n"
+#define yes cout << "YES\n"
+#define no cout << "NO\n"
+#define mp make_pair
+#define pb push_back
+#define ff first
+#define ss second
+#define INF 2e18
+#define fast_cin() ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL)
+#define all(x) (x).begin(), (x).end()
+#define sz(x) ((ll)(x).size())
+
 #define si(x) scanf("%d",&x)
 #define sl(x) scanf("%lld",&x)
 #define stri(s) scanf("%s",s)
@@ -70,15 +70,13 @@ template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i
 
 
 /*********************************************************************************/
-ll gcd (ll a, ll b) { return b ? gcd (b, a % b) : a;}
+ll gcd(ll  a, ll b){ if (b == 0) {return a;} return gcd(b, a % b);} 
 ll lcm(ll a, ll b){ return (a / gcd(a, b)) * b;}
 vector<ll> sieve(int n) {int*arr = new int[n + 1](); vector<ll> vect; for (int i = 2; i <= n; i++)if (arr[i] == 0) {vect.push_back(i); for (int j = 2 * i; j <= n; j += i)arr[j] = 1;} return vect;}
 vector<bool> sievebool(ll n){vector<bool> isPrime(n+1,true); for(int i=2;i*i<=n;i++){if(isPrime[i]){for(int j=i*i;j<=n;j=j+i){isPrime[j]=false;}}}return isPrime;}
-bool isPowerOfTwo(ll n){if(n==0) return false; if(n&(n-1)){return false;}else{return true;}}
+bool isPowerOfTwo(ll n){ if(n==0){return false;} return (ceil(log2(n)) == floor(log2(n)));}
 void swap(int &a, int &b) {a ^= b; b ^= a; a ^= b;}
-bool isprime(int n){if (n <= 1){return false;}for (int i = 2; i < n; i++){if (n % i == 0){return false;}return true;}}
-ll expo(ll a,ll b){ll ans =1; while(b){if(b&1){ans = (ans * a)%mod1;}a = (a*a)%mod1;b>>=1;}return ans;}
-ll binmultiply(ll a,ll b){ll ans =0;while(b){if(b&1){ans  = (ans + a)%mod1;}b>>=1;a = (a+a)%mod1;}return ans;}
+bool isPrime(int n){if (n <= 1){return false;}for (int i = 2; i < n; i++){if (n % i == 0){return false;}return true;}}
 /*********************************************************************************/
 
 
@@ -86,21 +84,79 @@ ll binmultiply(ll a,ll b){ll ans =0;while(b){if(b&1){ans  = (ans + a)%mod1;}b>>=
 
 
 void solve(){
-    cout<<"Hello"<<ln;
-    int a,b ;
-    cin>>a>>b;
-    int temp= min(a,b);
-    dbg(a);
-    while(temp>0){
-        if(a%temp==0 && b%temp ==0){
-            break;
+    ll n,k;
+    cin>>n>>k;
+    ll arr[n];
+    vector<ll> v1;
+    vector<ll> v2;
+    forn(i,n){
+        ll a ;
+        cin>>a;
+        if(a>0){
+            v1.push_back(a);
         }
-        --temp;
+        else if(a<0){
+            v2.push_back(a);
+        }
+
     }
-    cout<<temp;
+    ll sz1 = v1.size();
+    
+    ll sz2 = v2.size();
+    if(v1.size()>0&& v2.size()>0){
+        ll sum =0;
+        sort(all(v1));
+        sort(all(v2),greater<int>());
+        if(abs(v1[v1.size()-1])>abs(v2[v2.size()-1])){
+            
+            for(ll i=k-1;i<=v2.size()-1;i= min((i+k-1),sz2-1)){
+                sum = sum + 2*abs(v2[i]);
+            }
+            for(ll i=k-1;i<=v1.size()-1;i= min((i+k-1),sz1-1)){
+             
+                if(i==v1.size()-1){
+                    sum = sum + abs(v1[i]);
+                }
+                else{
+                    sum = sum + 2*abs(v1[i]);
+                }
+                
+            }
+            cout<<sum<<endl;
+
+
+        }
+        else if(abs(v1[v1.size()-1])<abs(v2[v2.size()-1])){
+            for(ll i=k-1;i<=v1.size()-1;i= min((i+k-1),sz1-1)){
+                
+                    sum = sum + 2*abs(v1[i]);
+                
+                
+            }
+
+
+            for(ll i=k-1;i<=v2.size()-1;i= min((i+k-1),sz2-1)){
+
+                if(i==v2.size()-1){
+                    sum = sum + abs(v1[i]);
+                }
+                else{
+                sum = sum + 2*abs(v2[i]);
+            }
+            
+            cout<<sum<<endl;
+        }
+        
+    }
+    else{
+        cout<<-1<<endl;
+    }
+    
+
+
+
 }
-
-
+}
 
 int main()
 {
