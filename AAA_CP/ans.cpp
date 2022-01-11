@@ -86,18 +86,9 @@ ll binmultiply(ll a,ll b){ll ans =0;while(b){if(b&1){ans  = (ans + a)%mod1;}b>>=
 
 
 void solve(){
-    cout<<"Hello"<<ln;
-    int a,b ;
-    cin>>a>>b;
-    int temp= min(a,b);
-    dbg(a);
-    while(temp>0){
-        if(a%temp==0 && b%temp ==0){
-            break;
-        }
-        --temp;
-    }
-    cout<<temp;
+    int i;
+    for( i=0;i<3;i++);
+    cout<<i++;
 }
 
 
